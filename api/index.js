@@ -22,13 +22,21 @@ const contentTypes = {
     '.json': 'application/json'
 };
 
+const rootDir = path.join(__dirname, '..');
+
 // 静态文件处理中间件（必须在通配符路由之前）
 app.use((req, res, next) => {
     const ext = path.extname(req.path).toLowerCase();
     
     // 如果是静态文件请求
     if (ext && contentTypes[ext] && ext !== '.html') {
-        const filePath = path.join(__dirname, '..', req.path);
+        const relativePath = req.path.replace(/^\/+/, '');
+        const filePath = path.resolve(rootDir, relativePath);
+        
+        // 阻止目录遍历
+        if (!filePath.startsWith(rootDir)) {
+            return next();
+        }
         
         // 检查文件是否存在
         if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
@@ -42,12 +50,12 @@ app.use((req, res, next) => {
 });
 
 // 使用 express.static 作为备用
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(rootDir));
 
 // 所有其他请求返回 index.html (SPA fallback)
 app.get('*', (req, res) => {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
+    res.sendFile(path.join(rootDir, 'index.html'));
 });
 
 module.exports = app;

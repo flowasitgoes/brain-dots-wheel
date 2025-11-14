@@ -23,5 +23,15 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": [
+        "index.html",
+        "game.js",
+        "style.css",
+        "favicon.ico"
+      ]
+    }
+  }
 }
