@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#667eea">
+    <title>Brain Dots - Colors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="start-screen" class="screen active">
+            <h1>Brain Dots - Colors</h1>
+            <div id="best-score">最佳分数: 0</div>
+            <div id="last-score" class="hidden">上次分数: 0</div>
+            <button id="play-btn" class="play-button">开始游戏</button>
+        </div>
+        <div id="game-over-screen" class="screen">
+            <h2>游戏结束!</h2>
+            <div id="final-score">分数: 0</div>
+            <button id="restart-btn" class="play-button">再玩一次</button>
+        </div>
+        <div id="tutorial" class="tutorial">
+            <p>移动轮子并用相同颜色的球击中它们</p>
+            <p>左侧控制左轮，右侧控制右轮</p>
+            <p>点击屏幕开始</p>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
